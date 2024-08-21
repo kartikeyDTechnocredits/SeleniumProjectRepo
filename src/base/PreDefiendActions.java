@@ -19,6 +19,10 @@ public class PreDefiendActions {
 		driver.quit();
 	}
 	
+	 public void sendText(String path, String text) {
+		getElement(path).sendKeys(text);
+	}
+	
 	private WebElement getElement(String path) {
 		 return driver.findElement(By.xpath(path));
 	}
