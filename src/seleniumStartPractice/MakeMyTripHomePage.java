@@ -28,6 +28,11 @@ public class MakeMyTripHomePage extends PreDefiendActions{
 		clickAction("//li[@data-cy='adults-4']");
 		clickAction("//button[text()='APPLY']");
 		System.out.println("Source, Destination, Date, Adult selected");
+		Thread.sleep(500);
+		clickAction("//div[text()='Student']");
+		Thread.sleep(500);
+		clickAction("//a[text()='Search']");
+		System.out.println("Search is completed ");
 	}
 	void quitHomePage() {
 		stop();
