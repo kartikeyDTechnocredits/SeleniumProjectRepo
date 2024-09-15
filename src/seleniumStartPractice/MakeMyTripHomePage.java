@@ -4,8 +4,7 @@ import base.PreDefiendActions;
 
 public class MakeMyTripHomePage extends PreDefiendActions{
 	
-	void homePageAccess() throws InterruptedException {
-		start();	
+	void homePageAccess() throws InterruptedException {	
 		Thread.sleep(3000);
 		clickAction("//span[@class='commonModal__close']");
 		clickAction("//li[@class='menu_Flights']");
@@ -38,10 +37,15 @@ public class MakeMyTripHomePage extends PreDefiendActions{
 		stop();
 	}
 	
+	void openHomepage(String url) {
+		start(url);
+	}
+	
 	
 	
 	public static void main(String[] args) throws InterruptedException {
 		MakeMyTripHomePage mmt= new MakeMyTripHomePage();
+		mmt.openHomepage("https://www.makemytrip.com/");
 		mmt.homePageAccess();
 		mmt.quitHomePage();
 	}
