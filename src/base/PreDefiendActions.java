@@ -5,9 +5,9 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriver.Timeouts;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,12 +20,15 @@ public class PreDefiendActions {
 	private Select oselect;
 	private JavascriptExecutor js;
 	private ReadPropertyFile readProp;
-
+	private Actions action;
+	private	WebDriverWait wait;
 	public void start(String url) {
 		System.setProperty("webdriver.chrome.driver", ".\\resources\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		js = (JavascriptExecutor) driver;
+		 wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		action= new Actions(driver);
 		driver.get(getKeyValue(url));
 	}
 
@@ -38,7 +41,7 @@ public class PreDefiendActions {
 	}
 
 	public void clickByJavaScript(String path) {
-		js.executeScript("arguments[0].click();", getElement(path));
+		js.executeScript("arguments[0].click();", waitForElement(path));
 	}
 
 	public void stop() {
@@ -58,7 +61,7 @@ public class PreDefiendActions {
 	}
 
 	public String getElementText(String path) {
-		return waitForElement(getKeyValue(path)).getText();
+		return waitForElement(path).getText();
 	}
 
 	public void toDefault() {
@@ -83,22 +86,25 @@ public class PreDefiendActions {
 	}
 
 	private WebElement getElement(String path) {
-		return driver.findElement(By.xpath(path));
+		return driver.findElement(By.xpath(getKeyValue(path)));
 	}
 
 	public void clickAction(String key) {
 
-		getElement(getKeyValue(key)).click();
+		getElement(key).click();
 
 	}
 
 	WebElement waitForElement(String path) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-		return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(path)));
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getKeyValue(path))));
+	}
+	
+	public Boolean textToBeExtracted(String key, String text) {
+		return wait.until(ExpectedConditions.textToBePresentInElement(getElement(key), text));
 	}
 
 	public void waitAndClick(String path) {
-		waitForElement(getKeyValue(path)).click();
+		waitForElement(path).click();
 	}
 
 	public void waitAndSendText(String path, String text) {
@@ -109,5 +115,10 @@ public class PreDefiendActions {
 		oselect = new Select(waitForElement(path));
 		oselect.selectByValue(value);
 	}
+	
+	public void dragAndDropAction(String source, String destination) {
+		action.dragAndDrop(waitForElement(source), waitForElement(destination)).build().perform();
+	}
+
 
 }
