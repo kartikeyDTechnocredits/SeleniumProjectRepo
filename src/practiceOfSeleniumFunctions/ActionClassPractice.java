@@ -1,5 +1,7 @@
 package practiceOfSeleniumFunctions;
 
+import org.testng.annotations.Test;
+
 import base.PreDefiendActions;
 
 public class ActionClassPractice extends PreDefiendActions{
@@ -47,7 +49,9 @@ public class ActionClassPractice extends PreDefiendActions{
 	void taeDown() {
 		stop();
 	}
-	public static void main(String[] args) {
+	
+	@Test
+	public  void actionPractice() {
 		ActionClassPractice ap= new ActionClassPractice();
 		ap.startUp(".\\resources\\DemoQA.properties");
 		ap.acceptDragAndDrop();
