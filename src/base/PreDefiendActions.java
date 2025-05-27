@@ -102,6 +102,8 @@ public class PreDefiendActions {
 	public Boolean textToBeExtracted(String key, String text) {
 		return wait.until(ExpectedConditions.textToBePresentInElement(getElement(key), text));
 	}
+	
+	
 
 	public void waitAndClick(String path) {
 		waitForElement(path).click();
