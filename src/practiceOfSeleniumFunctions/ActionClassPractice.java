@@ -1,19 +1,22 @@
 package practiceOfSeleniumFunctions;
 
-import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
 import base.PreDefiendActions;
 
 public class ActionClassPractice extends PreDefiendActions{
 	
-	void startUp(String propertyFileplath)   {
-	loadPropertyFile(propertyFileplath);
+	@BeforeTest
+	void startUp()   {		
+	loadPropertyFile(".\\resources\\DemoQA.properties");
 	start("Site");
 	}
 	
-	
+	@BeforeMethod
 	void droppable() {
-	//	loadPropertyFile(propfilePath);
+		waitAndClick("MainMenu");
 		clickByJavaScript("Interactions");
 		scrollToTheElement("Droppable");
 		//clickByJavaScript("Droppable");
@@ -21,41 +24,35 @@ public class ActionClassPractice extends PreDefiendActions{
 		
 	}
 		
+	@Test
 	void simpleDragAndDrop()	{
-		droppable();
 		scrollToTheElement("Simple_DragMe");
 		dragAndDropAction("Simple_DragMe", "Simple_DropHere");
 		System.out.println("KD is Here");
 		System.out.println(getElementText("Simple_Dropped"));
-		textToBeExtracted("Simple_Dropped","Dropped!" );
-		
-		
-//		if(getElementText("Simple_Dropped").equals("Dropped!"))
-//			System.out.println("Simple Darg and Drop Succssfull!!");
-//		else
-//			System.out.println("We are not able to perform Simple Drag and Drop");		
+		Assert.assertEquals("Dropped!", getElementText("Simple_Dropped"));	
 	}
 	
-	
+	@Test(priority=1)
 	void acceptDragAndDrop() {
-		droppable();
+//		droppable();
 		scrollToTheElement("Accept");
 		clickAction("Accept");
 		dragAndDropAction("Acceptable", "Accept_DropHere");
-		textToBeExtracted("Accept_Dropped", "Dropped!");
-		
+		Assert.assertEquals("Dropped!", getElementText("Accept_Dropped"));
 	}
 	
+	@AfterTest	
 	void taeDown() {
 		stop();
 	}
 	
-	@Test
-	public  void actionPractice() {
-		ActionClassPractice ap= new ActionClassPractice();
-		ap.startUp(".\\resources\\DemoQA.properties");
-		ap.acceptDragAndDrop();
-		ap.taeDown();
-	}
+	
+//	public  void actionPractice() {
+//		ActionClassPractice ap= new ActionClassPractice();
+//		ap.startUp(".\\resources\\DemoQA.properties");
+//		ap.acceptDragAndDrop();
+//		ap.taeDown();
+//	}
 
 }
