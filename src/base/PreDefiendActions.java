@@ -2,6 +2,7 @@ package base;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,7 @@ public class PreDefiendActions {
 	private ReadPropertyFile readProp;
 	private Actions action;
 	private	WebDriverWait wait;
+	private Alert alert;
 	public void start(String url) {
 		System.setProperty("webdriver.chrome.driver", ".\\resources\\chromedriver.exe");
 		driver = new ChromeDriver();
@@ -117,10 +119,30 @@ public class PreDefiendActions {
 		oselect = new Select(waitForElement(path));
 		oselect.selectByValue(value);
 	}
+	public void selectionByIndex(String path, int  value) {
+		oselect = new Select(waitForElement(path));
+		oselect.selectByIndex(value);
+	}
 	
 	public void dragAndDropAction(String source, String destination) {
 		action.dragAndDrop(waitForElement(source), waitForElement(destination)).build().perform();
 	}
 
+	public void alertAccept() {
+		alert= driver.switchTo().alert();
+		alert.accept();
+	}
+	
+	public void alertDismiss() {
+		alert= driver.switchTo().alert();
+		alert.dismiss();
+	}
+	
+	public String alertText() {
+		alert= driver.switchTo().alert();
+		return alert.getText();
+	}
+	
+	
 
 }
