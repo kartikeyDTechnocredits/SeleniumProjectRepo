@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="practiceOfSeleniumFunctions.ActionClassPractice">
+      <class name="practiceOfSeleniumFunctions.FormPracticeDataProvider">
         <methods>
+          <include name="formFill" invocation-numbers="0"/>
           <include name="taeDown"/>
-          <include name="simpleDragAndDrop"/>
+          <include name="MainMenu"/>
           <include name="startUp"/>
-          <include name="droppable"/>
         </methods>
-      </class> <!-- practiceOfSeleniumFunctions.ActionClassPractice -->
+      </class> <!-- practiceOfSeleniumFunctions.FormPracticeDataProvider -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
