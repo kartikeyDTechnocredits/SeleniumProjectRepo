@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -117,10 +118,12 @@ public class PreDefiendActions {
 
 	public void selectionByValue(String path, String value) {
 		oselect = new Select(waitForElement(path));
+		System.out.println(oselect.getOptions());
 		oselect.selectByValue(value);
 	}
 	public void selectionByIndex(String path, int  value) {
 		oselect = new Select(waitForElement(path));
+		System.out.println(oselect.getOptions());
 		oselect.selectByIndex(value);
 	}
 	

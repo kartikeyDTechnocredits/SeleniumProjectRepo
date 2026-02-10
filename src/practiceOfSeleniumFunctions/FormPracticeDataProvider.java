@@ -29,18 +29,24 @@ public class FormPracticeDataProvider extends PreDefiendActions {
 		waitAndSendText("FormName", uname);
 		sendText("FormLastName", lName);
 		sendText("FormEmail", email);
-		clickAction("FormGender");
+		clickByJavaScript("FormGender");
 		sendText("FormMobileNumber", mobNum);
-		//clickAction("FormHobbies");
+		clickAction("FormsDOBCLick");
+		System.out.println("DOB CLicked--------");
+		selectionByValue("FormDOBMonth", "September");
+		clickAction("FormDOBDate");
 		scrollToTheElement("FormHobbies");
 		clickByJavaScript("FormHobbies");
 		sendText("FormCurrntAddress", currAdd);
+		sendText("FormStateText", "Har");   // To test Drop Down
+		clickAction("//div[@id='state']//div[@class=' css-1hwfws3']/div[1]");
 	//	selectionByIndex("FormState", 1);
 	//	selectionByIndex("FormCity", 1);
 		clickAction("FormSubMitBtn");
 		scrollToTheElement("FormClose");
 		System.out.println(getElementText("FormDOBText"));
 		clickByJavaScript("FormClose");
+		
 	}
 	
 	@DataProvider(name="FormData")
